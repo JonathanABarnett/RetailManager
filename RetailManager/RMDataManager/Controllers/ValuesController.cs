@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace RMDataManager.Controllers
 {
@@ -13,7 +14,10 @@ namespace RMDataManager.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            string userId = RequestContext.Principal.Identity.GetUserId();
+            string userEmail = RequestContext.Principal.Identity.GetUserName();
+
+            return new string[] { userId, userEmail, "value1", "value2" };
         }
 
         // GET api/values/5
